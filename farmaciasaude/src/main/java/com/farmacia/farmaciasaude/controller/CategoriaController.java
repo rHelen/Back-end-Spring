@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +38,7 @@ public class CategoriaController {
 
 	@GetMapping("/tipo/{tipo}")
 	public ResponseEntity<List<Categoria>> GetByTipo(@PathVariable String tipo) {
-		return ResponseEntity.ok(repositoty.findAllByTipoCotainingIgnoreCase(tipo));
+		return ResponseEntity.ok(repositoty.findAllByTipoContainingIgnoreCase(tipo));
 	}
 
 	@PostMapping
@@ -48,5 +49,10 @@ public class CategoriaController {
 	@PutMapping
 	public ResponseEntity<Categoria> put(@RequestBody Categoria categoria) {
 		return ResponseEntity.ok(repositoty.save(categoria));
+	}
+
+	@DeleteMapping("/{id}")
+	public void delete (@PathVariable Long id) {
+		repositoty.deleteById(id);
 	}
 }

@@ -38,7 +38,7 @@ public class ProdutoController {
 	}
 	@GetMapping("/nome/{nome}")
 	public ResponseEntity<List<Produto>> GetByNome (@PathVariable String nome){
-		return ResponseEntity.ok(repositoty.findAllByNomeCotainingIgnoreCase(nome));
+		return ResponseEntity.ok(repositoty.findAllByNomeContainingIgnoreCase(nome));
 	}
 	
 	@PostMapping
@@ -48,7 +48,7 @@ public class ProdutoController {
 	
 	@PutMapping
 	public ResponseEntity<Produto> put (@RequestBody Produto produto){
-		return ResponseEntity.ok(repositoty.save(produto));
+		return ResponseEntity.status(HttpStatus.OK).body(repositoty.save(produto));
 	}
 	@DeleteMapping("/{id}")
 	public void delete (@PathVariable Long id) {
